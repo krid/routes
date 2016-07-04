@@ -1,0 +1,27 @@
+<table class="table sortable">
+<thead>
+<th data-sort="string">Ride</th>
+<th data-sort="float">Distance (Miles)</th>
+<th data-sort="int">Climbing (feet)</th>
+<th data-sort="string">Last Ridden</th>
+<th data-sort="int">Interval Count</th>
+<th>Intervals</th>
+<th>Route Map</th>
+</thead><tbody>
+{% for route in routes %}
+<tr>
+<td>{{route.ride}}</td>
+<td data-sort-value="{{route.distance|default:0}}">{% if route.distance %}
+<a href="{% url 'routes.views.show_route' route.pk %}">{{route.distance}}</a>
+{% endif %}</td>
+<td data-sort-value="{{route.climbing|default:0}}">{% if route.climbing %}
+<a href="{% url 'routes.views.show_route' route.pk %}">{{route.climbing}}</a>
+{% endif %}</td>
+<td class="text-nowrap">{{route.routedate_set.all.latest.date|date:'Y-m-d'}}</td>
+<td>{{route.segments.all|length}}</td>
+<td>{% for rseg in route.routesegment_set.all %}
+<a href="{% url 'routes.views.show_segment' rseg.segment.slug %}">{{rseg.segment.name}}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</td>
+<td><a href="{{route.url}}"><span class="glyphicon glyphicon-link" aria-hidden="true"></span></a></td>
+</tr>
+{% endfor %}</tbody>
+</table>

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<table class="table">
+<tr><th>Name</th>
+<td>{{segment.name}}</td>
+</tr>
+
+<tr><th>Length</th>
+<td>{{segment.length}}</td>
+</tr>
+
+<tr><th>Height</th>
+<td>{{segment.altitude}}</td>
+</tr>
+
+<tr><th>Average Grade</th>
+<td>{{segment.avg_grade}}</td>
+</tr>
+
+<tr><th>KOM Time</th>
+<td>{{segment.kom_time}}</td>
+</tr>
+
+<tr><th>Strava Name</th>
+<td>{{segment.strava_name}}</td>
+</tr>
+
+<tr><th>Strava URL</th>
+<td><a href="{{segment.strava_url}}">{{segment.strava_url}}</a></td>
+</tr>
+
+<tr><th>Notes</th>
+<td>{{segment.notes}}</td>
+</tr>
+
+<tr><th>{{segment.routes.all|length}} Routes</th>
+<td>
+{% include "route-list.html" with routes=segment.routes.all %}
+</td>
+</tr>
+</table>
+
+{% endblock %}

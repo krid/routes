@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="page-header">
+<h1>Segments</h1>
+</div>
+
+<h3>{{segments|length}} Segments</h3>
+
+<table class="table sortable">
+<thead>
+<th data-sort="string">Segment</th>
+<th data-sort="int">Routes</th>
+</thead><tbody>{% for segment in segments %}
+<tr>
+<td><a href="{% url 'routes.views.show_segment' segment.slug %}">{{segment}}</a></td>
+<td>{{segment.routes.all|length}}</td>
+</tr>
+{% endfor %}</tbody>
+</table>
+
+{% endblock %}

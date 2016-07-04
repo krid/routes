@@ -1,0 +1,30 @@
+# Django dev db
+db.sqlite3
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Django stuff:
+*.log
+local_settings.py
+
+# IPython Notebook
+.ipynb_checkpoints
+
+# Emacs & Eclipse tempfiles & the like
+*~
+\#*\#
+*.tmp
+*.bak
+*.swp
+*~.nib
+.project
+*.pydevproject
+.Trash-*
+.fuse_hidden*
+.settings/

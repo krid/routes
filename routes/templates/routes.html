@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="page-header">
+<h1>Routes</h1>
+</div>
+<div class="row">
+<div class="col-md-4">
+
+<h3>Search Routes</h3>
+
+<form class="form-horizontal">
+ <div class="form-group">
+  <label for="{{ form.ride.id_for_label }}" class="col-sm-2 control-label">Ride:</label>
+  <div class="col-sm-10">
+   {% if form.ride.errors %}<div class="chunk-label ui-state-error">
+    {{ form.ride.errors }}
+   </div>{% endif %}
+   {{ form.ride }}
+  </div>
+ </div>
+ 
+ <div class="form-group">
+  <label for="{{ form.min_distance.id_for_label }}" class="col-sm-2 control-label">Minimum Distance:</label>
+  <div class="col-sm-10">
+   {% if form.min_distance.errors %}<div class="chunk-label ui-state-error">
+    {{ form.min_distance.errors }}
+   </div>{% endif %}
+   {{ form.min_distance }} miles
+  </div>
+ </div>
+ 
+ <div class="form-group">
+  <label for="{{ form.max_distance.id_for_label }}" class="col-sm-2 control-label">Maximum Distance:</label>
+  <div class="col-sm-10">
+   {% if form.max_distance.errors %}<div class="chunk-label ui-state-error">
+    {{ form.max_distance.errors }}
+   </div>{% endif %}
+   {{ form.max_distance }} miles
+  </div>
+ </div>
+ 
+ <div class="form-group">
+  <label for="{{ form.min_climbing.id_for_label }}" class="col-sm-2 control-label">Minimum Climbing:</label>
+  <div class="col-sm-10">
+   {% if form.min_climbing.errors %}<div class="chunk-label ui-state-error">
+    {{ form.min_climbing.errors }}
+   </div>{% endif %}
+   {{ form.min_climbing }} ft.
+  </div>
+ </div>
+ 
+ <div class="form-group">
+  <label for="{{ form.max_climbing.id_for_label }}" class="col-sm-2 control-label">Maximum Climbing:</label>
+  <div class="col-sm-10">
+   {% if form.max_climbing.errors %}<div class="chunk-label ui-state-error">
+    {{ form.max_climbing.errors }}
+   </div>{% endif %}
+   {{ form.max_climbing }} ft.
+  </div>
+ </div>
+ 
+ <div class="form-group">
+  <label for="{{ form.include_segment.id_for_label }}" class="col-sm-2 control-label">Include Segment:</label>
+  <div class="col-sm-10">
+   {% if form.include_segment.errors %}<div class="chunk-label ui-state-error">
+    {{ form.include_segment.errors }}
+   </div>{% endif %}
+   {{ form.include_segment }}
+  </div>
+ </div>
+ 
+ <div class="form-group">
+  <label for="{{ form.exclude_segment.id_for_label }}" class="col-sm-2 control-label">Exclude Segment:</label>
+  <div class="col-sm-10">
+   {% if form.exclude_segment.errors %}<div class="chunk-label ui-state-error">
+    {{ form.exclude_segment.errors }}
+   </div>{% endif %}
+   {{ form.exclude_segment }}
+  </div>
+ </div>
+ <!-- 
+ Include at least one hill of this grade
+ Exclude hills steeper than this grade
+ -->
+
+ <div class="form-group">
+  <div class="col-sm-offset-2 col-sm-10">
+   <button type="submit" class="btn btn-default">Search</button>
+   <button type="reset" class="btn btn-default">Clear</button>
+  </div>
+ </div>
+</form>
+
+</div>
+<div class="col-md-8">
+
+<h3>{{routes|length}} Routes</h3>
+{% include "route-list.html" %}
+</div>
+
+{% endblock %}

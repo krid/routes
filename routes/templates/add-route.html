@@ -1,0 +1,167 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if route %}
+<h3>Proposed New Route</h3>
+<table class="table">
+<tr><th>Ride</th>
+<td>{{route.ride}}</td>
+</tr>
+
+<tr><th>Date</th>
+<td>{{routedate|date:'Y-m-d'}}</td>
+</tr>
+
+<tr><th>Route</th>
+<td>{{route.cue_sheet}}</td>
+</tr>
+
+<tr><th>Existing Intervals</th>
+<td>{% for seg in existing_segments %}
+<a href="{% url 'routes.views.show_segment' seg.slug %}">{{seg}}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</td>
+</tr>
+
+<tr><th>New Intervals</th>
+<td>{% for name in new_segments %}
+<strong>{{name}}{% if not forloop.last %}, {% endif %}{% endfor %}</strong></td>
+</tr>
+
+<tr><th>Distance</th>
+<td>{{route.distance}} Miles</td>
+</tr>
+
+<tr><th>Climbing</th>
+<td>{% if route.climbing %}{{route.climbing}} ft.{% endif %}</td>
+</tr>
+
+<tr><th>URL</th>
+<td><a href="{{route.url}}">{{route.url}}</a></td>
+</tr>
+
+<tr><th>Notes</th>
+<td>{% if route.notes %}<pre>{{route.notes}}</pre>{% endif %}</td>
+</tr>
+</table>
+
+{% endif %}
+
+<form class="form-horizontal" method="post">{% csrf_token %}
+
+ {% if validated %}
+ <div class="form-group">
+  <div class="col-sm-offset-2 col-sm-10">
+   If the above looks good you may
+   <button type="submit" name="action" value="create" class="btn btn-default">Create</button>
+   the new route.
+   {% if new_segments %}
+   <br />
+   The following new intervals will be created:
+   <br /><strong>
+   {% for name in new_segments %}
+{{name}}{% if not forloop.last %}<br />{% endif %}{% endfor %}
+  </strong>{% endif %}
+  </div>
+ </div>
+ {% endif %}
+
+ <div class="form-group">
+  <label for="{{ form.ride.id_for_label }}" class="col-sm-2 control-label">Ride:</label>
+  <div class="col-sm-10">
+   {% if form.ride.errors %}<div class="chunk-label ui-state-error">
+    {{ form.ride.errors }}
+   </div>{% endif %}
+   {{ form.ride }}
+  </div>
+ </div>
+ 
+ <div class="form-group">
+  <label for="{{ form.date.id_for_label }}" class="col-sm-2 control-label">Date:</label>
+  <div class="col-sm-10">
+   {% if form.date.errors %}<div class="chunk-label ui-state-error">
+    {{ form.date.errors }}
+   </div>{% endif %}
+   {{ form.date }}
+  </div>
+ </div>
+ 
+ <div class="form-group">
+  <label for="{{ form.distance.id_for_label }}" class="col-sm-2 control-label">Distance:</label>
+  <div class="col-sm-10">
+   {% if form.distance.errors %}<div class="chunk-label ui-state-error">
+    {{ form.distance.errors }}
+   </div>{% endif %}
+   {{ form.distance }} miles
+  </div>
+ </div>
+ 
+ <div class="form-group">
+  <label for="{{ form.climbing.id_for_label }}" class="col-sm-2 control-label">Climbing:</label>
+  <div class="col-sm-10">
+   {% if form.climbing.errors %}<div class="chunk-label ui-state-error">
+    {{ form.climbing.errors }}
+   </div>{% endif %}
+   {{ form.climbing }} ft.
+  </div>
+ </div>
+ 
+ <div class="form-group">
+  <label for="{{ form.name.id_for_label }}" class="col-sm-2 control-label">Name:</label>
+  <div class="col-sm-10">
+   {% if form.name.errors %}<div class="chunk-label ui-state-error">
+    {{ form.name.errors }}
+   </div>{% endif %}
+   {{ form.name }}
+  </div>
+ </div>
+ 
+ <div class="form-group">
+  <label for="{{ form.cue_sheet.id_for_label }}" class="col-sm-2 control-label">Cue Sheet:</label>
+  <div class="col-sm-10">
+   {% if form.cue_sheet.errors %}<div class="chunk-label ui-state-error">
+    {{ form.cue_sheet.errors }}
+   </div>{% endif %}
+   {{ form.cue_sheet }}
+  </div>
+ </div>
+ 
+ <div class="form-group">
+  <label for="{{ form.intervals.id_for_label }}" class="col-sm-2 control-label">Intervals:</label>
+  <div class="col-sm-10">
+   {% if form.intervals.errors %}<div class="chunk-label ui-state-error">
+    {{ form.intervals.errors }}
+   </div>{% endif %}
+   {{ form.intervals }}
+  </div>
+ </div>
+ 
+ <div class="form-group">
+  <label for="{{ form.url.id_for_label }}" class="col-sm-2 control-label">URL:</label>
+  <div class="col-sm-10">
+   {% if form.url.errors %}<div class="chunk-label ui-state-error">
+    {{ form.url.errors }}
+   </div>{% endif %}
+   {{ form.url }}
+  </div>
+ </div>
+
+ <div class="form-group">
+  <label for="{{ form.notes.id_for_label }}" class="col-sm-2 control-label">Notes:</label>
+  <div class="col-sm-10">
+   {% if form.notes.errors %}<div class="chunk-label ui-state-error">
+    {{ form.notes.errors }}
+   </div>{% endif %}
+   {{ form.notes }}
+  </div>
+ </div>
+ 
+ <div class="form-group">
+  <div class="col-sm-offset-2 col-sm-10">
+   <button type="submit" name="action" value="validate" class="btn btn-default">Validate</button>
+   <button type="reset" class="btn btn-default">Clear</button>
+  </div>
+ </div>
+</form>
+
+
+{% endblock %}

@@ -1,0 +1,8 @@
+{% if show_dates_notes %}{% filter wordwrap:70 %}{% for routedate in route.routedate_set.all %}{{routedate.date|date:'Y-m-d'}}{% if not forloop.last %}, {% endif %}{% endfor %}{% endfilter %}
+{% endif %}Route: {{route.cue_sheet|wordwrap:70}}
+
+{{route.segments.all|length}} Intervals: {% filter wordwrap:70 %}{% for rseg in route.routesegment_set.all %}{{rseg.segment.name}}{% if not forloop.last %}, {% endif %}{% endfor %}{% endfilter %}
+
+{{route.distance}} Miles{% if route.climbing %}, {{route.climbing}} ft.{% endif %}
+{{route.url}}
+{% if show_dates_notes %}{% filter wordwrap:70 %}[{{route.notes}}]{% endfilter %}{% endif %}

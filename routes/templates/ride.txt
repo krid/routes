@@ -1,0 +1,18 @@
+{{ride.name}}
+{{ride.tagline}}
+
+Email Subject: {{ride.email_subject}}
+
+Email Boilerplate:
+{{ride.email_boilerplate}}
+
+Notes:
+{{ride.notes}}
+
+Routes:
+
+{% for route in ride.routes %}
+========
+{% include "route.txt" with show_dates_notes=True %}
+
+{% endfor %}

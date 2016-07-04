@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if message %}
+<h3>{{message}}</h3>
+{% endif %}
+
+<table class="table">
+<tr><th>Ride</th>
+<td>{{route.ride}}</td>
+</tr>
+
+<tr><th>Dates</th>
+<td>{% for routedate in route.routedate_set.all %}{{routedate.date|date:'Y-m-d'}}{% if not forloop.last %}, {% endif %}{% endfor %}</td>
+</tr>
+
+<tr><th>Route</th>
+<td>{{route.cue_sheet}}</td>
+</tr>
+
+<tr><th>Intervals</th>
+<td>{% for rseg in route.routesegment_set.all %}
+<a href="{% url 'routes.views.show_segment' rseg.segment.slug %}">{{rseg.segment}}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</td>
+</tr>
+
+<tr><th>Distance</th>
+<td>{{route.distance}} Miles</td>
+</tr>
+
+<tr><th>Climbing</th>
+<td>{% if route.climbing %}{{route.climbing}} ft.{% endif %}</td>
+</tr>
+
+<tr><th>URL</th>
+<td><a href="{{route.url}}">{{route.url}}</a></td>
+</tr>
+
+<tr><th>Notes</th>
+<td>{% if route.notes %}<pre>{{route.notes}}</pre>{% endif %}</td>
+</tr>
+</table>
+
+<h3>Email</h3>
+<pre>
+{{route.ride.email_subject}}
+
+{{route.ride.email_boilerplate}}
+
+{% include "route.txt" %}
+</pre>
+
+{% endblock %}
