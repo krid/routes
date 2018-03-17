@@ -25,4 +25,6 @@ urlpatterns = [
     url(r'^route/add', views.add_route),
     url(r'^segments/', views.show_segments),
     url(r'^segment/([\w-]+)', views.show_segment),
+    url(r'^ride/([\w-]+)', views.show_ride),
+    url(r'^rides/', views.show_rides),
 ]

@@ -97,6 +97,9 @@
 <div class="col-md-8">
 
 <h3>{{routes|length}} Routes</h3>
+
+<a href="{% url "routes.views.add_route" %}">Add Route</a>
+
 {% include "route-list.html" %}
 </div>
 

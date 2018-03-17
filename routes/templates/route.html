@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base.html" %}{% load admin_urls %}
 
 {% block content %}
 
@@ -8,7 +8,7 @@
 
 <table class="table">
 <tr><th>Ride</th>
-<td>{{route.ride}}</td>
+<td><a href="{% url 'routes.views.show_ride' route.ride.slug %}">{{route.ride}}</a></td>
 </tr>
 
 <tr><th>Dates</th>
@@ -40,6 +40,8 @@
 <td>{% if route.notes %}<pre>{{route.notes}}</pre>{% endif %}</td>
 </tr>
 </table>
+
+<a href="{% url 'admin:routes_route_change' route.pk %}">Edit</a>
 
 <h3>Email</h3>
 <pre>

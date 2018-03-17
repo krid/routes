@@ -136,6 +136,19 @@ def show_segment(request, slug):
     return render(request, "segment.html", dict(segment=segment))
 
 
+@require_safe
+def show_rides(request):
+    logging.info("show_rides")
+    return render(request, "rides.html", dict(rides=Ride.objects.all()))
+
+
+@require_safe
+def show_ride(request, slug):
+    logging.info("show_ride %d", slug)
+    ride = Ride.objects.get(slug=slug)
+    return render(request, "ride.html", dict(ride=ride))
+
+
 class RouteForm(forms.Form):
     """Form for adding and editing Routes.
     """

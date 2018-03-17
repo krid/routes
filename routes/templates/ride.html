@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if message %}
+<h3>{{message}}</h3>
+{% endif %}
+
+<table class="table">
+<tr><th>Name</th>
+<td>{{ride.name}}</td>
+</tr>
+
+<tr><th>Routes</th>
+<td>{{ride.route_set.all|length}}</td>
+</tr>
+
+<tr><th>Tagline</th>
+<td>{{ride.tagline}}</td>
+</tr>
+
+<tr><th>Email Subject</th>
+<td>{{ride.email_subject}}</td>
+</tr>
+
+<tr><th>Email Boilerplate</th>
+<td><pre>{{ride.email_boilerplate}}</pre></td>
+</tr>
+
+<tr><th>Notes</th>
+<td>{% if ride.notes %}<pre>{{ride.notes}}</pre>{% endif %}</td>
+</tr>
+</table>
+
+<h3>Text</h3>
+<pre>
+{% include "ride.txt" %}
+</pre>
+
+{% endblock %}

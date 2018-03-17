@@ -11,8 +11,6 @@ Notes:
 
 Routes:
 
-{% for route in ride.routes %}
-========
+{% for route in ride.route_set.all %}========
 {% include "route.txt" with show_dates_notes=True %}
-
 {% endfor %}
